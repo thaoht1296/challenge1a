@@ -16,74 +16,137 @@
 </head>
 <body>
   <div style="display: flex; margin: 20px">
-    <div style="width: 25%; margin-top: 20px;">
-      <div style="padding: 10px 5px; border: 1px solid black; background: #eef3fc">Tên user 1</div>
-      <div style="padding: 10px 5px; border: 1px solid black; background: #eef3fc">Tên user 2</div>
-      <div style="padding: 10px 5px; border: 1px solid black; background: #eef3fc">Tên user 3</div>
-      <div style="padding: 10px 5px; border: 1px solid black; background: #eef3fc">Tên user 4</div>
-    </div>
     <div style="margin: 10px; width: 50%">
       <div style="width: 90%">
-<!--        tin1-->
-        <div style="margin: 20px 10px;">
-          <div><b>Tên user 1</b></div>
-          <div style="padding: 10px; background: aliceblue; border-radius: 10px; border: 1px solid black">
-            Message gửi user 2 nè!
-<!--              <span innerText="hello /n hello"></span>-->
-<!--              <span innerHtml="hell <br> hello"></span>-->
-          </div>
-          <div style="margin-left: 10px">
-            <span style="margin-right: 15px; cursor: pointer"><b>Edit</b></span>
-            <span style="cursor: pointer; color: red"><b>Delete</b></span>
-          </div>
-        </div>
-<!--        tin2-->
-        <div style="margin: 20px 10px;">
-          <div><b>Tên user 1</b></div>
-          <div style="padding: 10px; background: aliceblue; border-radius: 10px; border: 1px solid black">
-            Message gửi user 2 nè!
-          </div>
-          <div style="margin-left: 10px">
-            <span style="margin-right: 15px; cursor: pointer"><b>Edit</b></span>
-            <span style="cursor: pointer; color: red"><b>Delete</b></span>
-          </div>
-        </div>
+        <h4>Message list sent to <?=$_SESSION['username']; ?></h4>
+        <table class="table table-bordered table-striped">
+          <thead>
+              <tr>
+                  <th>Date</th>
+                  <th>From</th>
+                  <th>Content</th>                                                                  
+              </tr>
+          </thead>
+          <tbody>
+          <?php
+            if(isset($_SESSION['username'])) {
+                $username = mysqli_real_escape_string($con, $_SESSION['username']);
+                // echo $username;
+                $query = "SELECT * FROM `message` WHERE `to` = '$username'";
+                $query_run = mysqli_query($con, $query);
+                if($query_run){
+                  $numrows = mysqli_num_rows($query_run);
+                  // echo $numrows;
+                  if($numrows > 0)
+                  {
+                      foreach($query_run as $message1)
+                      {
+                          ?>
+                          <tr>
+                              <td><?= $message1['date']; ?></td>
+                              <td><?= $message1['from']; ?></td>
+                              <td><?= $message1['content']; ?></td>                               
+                              
+                          </tr>
+                    <?php
+                    }
+                  }
+                } else{
+                    echo "<h5> No Record Found </h5>";
+                }
+            }  
+          ?>
+          </tbody>
+        </table>
       </div>
-      <hr>
-      <div style="display: flex; justify-content: space-around; align-items: start;">
-        <textarea placeholder="Text message..." rows="3"
-                  style="border-radius: 10px; background: #f6f6f6; width: 90%; padding: 10px">
-            Message gui ban/n
-        </textarea>
-        <button class="btn btn-info ml-3">Send</button>
-      </div>
-    </div>
-    <div style="width: 25%; background: #ffffebe3; padding: 20px; min-height: 400px">
-        <div style="width: 50px; height: 50px; margin: auto">
-            <img style="width: 50px; height: 50px" src="./user.png" alt="user-image">
-        </div>
-          <div style="line-height: 2; width: fit-content; margin: auto;">
-            <div><b>Full name:</b> Ho ten</div>
-            <div><b>Email:</b> email@gmail.com</div>
-            <div style="margin-bottom: 10px"><b>Phone:</b> 012345678</div>
-            <div style="text-align: center;"><input type="submit" class="btn btn-success" value="Edit"></div>
-          </div>
-
-<!--      div nay chi sua thong tin-->
-<!--      <div style="width: fit-content; margin: auto;">-->
-<!--        <form action="">-->
-<!--          <label>Email:</label><br>-->
-<!--          <input type="text" id="fname" name="email" value="email1111"><br><br>-->
-<!--          <label>Phone:</label><br>-->
-<!--          <input type="text" id="lname" name="phone" value="0123234"><br><br>-->
-<!--          <label>Password:</label><br>-->
-<!--          <input type="text" id="pass" name="password" value="hello@1r3"><br><br>-->
-<!--          <div style="text-align: center;">-->
-<!--            <input type="submit" class="btn btn-success" value="Update">-->
-<!--          </div>-->
-<!--        </form>-->
-<!--      </div>-->
     </div>
   </div>
+
+  <div style="display: flex; margin: 20px">
+    <div style="margin: 10px; width: 50%">
+      <div style="width: 90%">
+        <h4>Message list from <?=$_SESSION['username']; ?></h4>
+        <table class="table table-bordered table-striped">
+          <thead>
+              <tr>
+                  <th>Date</th>
+                  <th>From</th>
+                  <th>Content</th>
+                  <th>Action</th>                                                                  
+              </tr>
+          </thead>
+          <tbody>
+          <?php
+            if(isset($_SESSION['username'])) {
+                $username = mysqli_real_escape_string($con, $_SESSION['username']);
+                // echo $username;
+                $query = "SELECT * FROM `message` WHERE `from` = '$username'";
+                $query_run = mysqli_query($con, $query);
+                if($query_run){
+                  $numrows = mysqli_num_rows($query_run);
+                  // echo $numrows;
+                  if($numrows > 0)
+                  {
+                      foreach($query_run as $message1)
+                      {
+                          ?>
+                          <tr>
+                              <td><?= $message1['date']; ?></td>
+                              <td><?= $message1['to']; ?></td>
+                              <td><?= $message1['content']; ?></td>                               
+                              <td>
+                                <div style="display:flex; justify-content:flex-start">
+                                   
+                                    <div style="margin-right:10px">
+                                        <a href="message_edit.php?id=<?= $message1['id']; ?>" class="btn btn-success btn-sm ">Edit</a>
+                                    </div>
+                                    <form action="stu_query.php" method="POST" class="d-inline">
+                                        <button type="submit" name="delete_message" value="<?=$message1['id'];?>" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+                                </div>
+
+                              </td>
+                          </tr>
+                    <?php
+                    }
+                  }
+                } else{
+                    echo "<h5> No Record Found </h5>";
+                }
+            }  
+          ?>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+      
+  </div>
+    <div style="width: 25%; background: #ffffebe3; padding: 20px; min-height: 400px">
+      <div style="width: 50px; height: 50px; margin: auto">
+          <img style="width: 50px; height: 50px" src="icon.png" alt="user-image">
+      </div>
+      <div style="line-height: 2; width: fit-content; margin: auto;">
+        <?php
+          if(isset($_SESSION['username'])){
+            $username = mysqli_real_escape_string($con, $_SESSION['username']);
+            $query = "SELECT * FROM user WHERE username = '$username' ";
+            $query_run = mysqli_query($con, $query);
+            $numrows = mysqli_num_rows($query_run);
+            $row = mysqli_fetch_assoc($query_run);
+        ?>
+          <div><b>Full name:</b> <?= $row['fullname']; ?></div>
+          <div><b>Email:</b> <?= $row['email']; ?></div>
+          <div style="margin-bottom: 10px"><b>Phone:</b> <?= $row['phone']; ?></div>
+          <div style="text-align: center;">
+            <a href="stu_update.php" class="btn btn-success btn-sm">Edit</a>
+          </div>
+          
+      <?php } 
+      ?>
+      </div>
+  </div>          
 </body>
 </html>

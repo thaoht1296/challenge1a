@@ -94,7 +94,18 @@
                               <td><?= $message1['date']; ?></td>
                               <td><?= $message1['to']; ?></td>
                               <td><?= $message1['content']; ?></td>                               
-                              
+                              <td>
+                                <div style="display:flex; justify-content:flex-start">
+                                   
+                                    <div style="margin-right:10px">
+                                        <a href="message_edit.php?id=<?= $message1['id']; ?>" class="btn btn-success btn-sm ">Edit</a>
+                                    </div>
+                                    <form action="stu_query.php" method="POST" class="d-inline">
+                                        <button type="submit" name="delete_message" value="<?=$message1['id'];?>" class="btn btn-danger btn-sm">Delete</button>
+                                    </form>
+                                </div>
+
+                              </td>
                           </tr>
                     <?php
                     }

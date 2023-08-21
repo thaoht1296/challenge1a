@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require 'dbcon.php';
 ?>
 <!doctype html>
@@ -62,7 +63,18 @@
                                             <?=$student['phone'];?>
                                         </p>
                                     </div>
-                                
+                                    <div class="mb-3">
+                                        <form action="lect_send_message.php" method="POST">
+                                            <div class="form-group pt-4 mb-2">
+                                                <input type="hidden" name='from' id="from" value='<?=$_SESSION['username']?>'>
+                                                <input type="hidden" name='to' id="to" value='<?= $student['username'] ?>'>
+                                                <input type="text" class="form-control" name='content' id="content" placeholder="Nhập tin nhắn" required minlength="1">
+                                            </div>
+                                            
+                                            <button type="submit" class="btn btn-primary" name="send">Send</button>
+            
+                                        </form>
+                                    </div>
 
                                 <?php
                             }

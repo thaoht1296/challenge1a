@@ -83,4 +83,37 @@ if(isset($_POST['create_student']))
     }
 }
 
+
+
+if(isset($_POST['edit_message']))
+{
+    $mess_id = mysqli_real_escape_string($con, $_POST['id']);
+    $content = mysqli_real_escape_string($con, $_POST['content']);
+    
+    // var_dump($username,$newpass,$fullname,$email, $phone);
+    // die();
+
+    $query = "UPDATE `message` SET `content`='$content' WHERE id='$mess_id'";
+
+    $query_run = mysqli_query($con, $query);
+    
+    if($query_run)
+    {
+       
+        // echo $mess_id;
+        // echo $content;
+        header("Location: stu_message.php");
+        exit(0);
+    }
+    else
+    {
+        // echo 'empty';
+        header("Location: stu_message.php");
+        exit(0);
+    }
+
+}
+
+?>
+
 ?>
