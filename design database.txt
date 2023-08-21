@@ -1,0 +1,130 @@
+1. user:
+- id
+- username
+- password
+- role:
+0: giao vien
+1: sinh vien
+- fullname
+- email
+- phone
+
+2. message
+- id
+- content
+- date
+- from (user id)
+- to (user id)
+
+3. question
+- id
+- name
+- file
+- user_id (role: giaovien)
+
+
+4. answer
+- id
+- name
+- file
+- question_id
+- user_id (role: sinh vien)
+
+
+INSERT INTO `user`(`id`, `username`, `password`, `role`, `fullname`, `email`, `phone`) VALUES ('1', 'teacher1', '123456a@A', '0', 'Nguyen Van A', 'a21@viettel.com.vn', '0972181178');
+
+
+
+
+
+
+
+Màn:
+- Login
+- logout
+- Các màn của giáo viên:
++ list svien
+SELECT fullname, email, phone FROM user WHERE role = '1'
+
++ detail svien: nút để lại lời nhắn
+SELECT fullname, email, phone FROM user WHERE role = '1' AND id = ....
+
++ create svien
+INSERT INTO user (username, password, role, fullname, email, phone)
+VALUES ('$username', '$password', '1', '$fullname', '$email', '$phone')
+
++ edit svien
+UPDATE user SET fullname = '' WHERE id = ...
+
+
++ delete svien (pop up)
+DELETE FROM user WHERE username = ''
+
++ list giaovien
+SELECT fullname, email, phone FROM user WHERE role = '0'
+
++ detail giaovien
+SELECT fullname, email, phone FROM user WHERE role = '1' AND id = ....
+
++ giao diện lời nhắn: textarea + button submit
+Nếu có lời nhắn rồi: textarea + button sửa/xóa
+INSERT INTO message (content, date, from, to)
+VALUES ('$content', '', '', '')
+
+UPDATE message SET content = '' , date = ... WHERE id = ...
+
+DELETE FROM message WHERE content = ... AND to = .....
+
+
++ profile (list lời nhắn người khác nhắn cho mk)
+SELECT date, from, content FROM message WHERE to =.....
+
++ list bài tập
+SELECT name, file FROM question
+
++ create bài tập
+INSERT INTO user (name, file)
+VALUES ('$name', '$file')
+
++ list bài làm sinh viên theo bai tap
+SELECT FROM answer, question WHERE question_id = question.id
+
+- Các màn của sinh viên:
++ list svien
+SELECT fullname, email, phone FROM user WHERE role = '1'
+
++ detail svien: nút để lại lời nhắn
+
++ edit svien:
+UPDATE user SET fullname = '' WHERE id = ...
+=> khong dc edit usernam, role, fullname
+
++ list giaovien
+SELECT fullname, email, phone FROM user WHERE role = '0'
+
++ detail giaovien
+SELECT fullname, email, phone FROM user WHERE role = '0' AND id = ....
+
++ giao diện lời nhắn: textarea + button submit
+Nếu có lời nhắn rồi: textarea + button sửa/xóa
+
+INSERT INTO message (content, date, from, to)
+VALUES ('$content', '', '', '')
+
+UPDATE message SET content = '' , date = ... WHERE id = ...
+
+DELETE FROM message WHERE content = ... AND to = .....
+
+
++ profile (list lời nhắn người khác nhắn cho mk)
+SELECT date, from, content FROM message WHERE to =.....
+
++ list bài tập (nút upload)
+SELECT FROM question WHERE user_id = ......
+
+
+
+upload file
+http://challenge5a-dungdd.000webhostapp.com/?controller=message&action=messenger
+https://github.com/dungkaito/challenge5a_dungdd/tree/main/Core
+https://www.geeksforgeeks.org/upload-pdf-file-to-mysql-database-for-multiple-records-using-php/

@@ -1,0 +1,72 @@
+1. user:
+- id
+- username
+- password
+- role: giaovien, sinhvien
+- họ tên
+- email
+- sdt
+
+2. message
+- id (mess)
+- content
+- date
+- from (user id)
+- to (user id)
+
+3. question (bài tập)
+- id
+- name
+- file
+- user_id (role: giaovien)
+
+
+4. answer (bài làm)
+- id
+- name 
+- file
+- question_id
+- user_id (role: sinh vien)
+
+
+INSERT INTO `user`(`id`, `username`, `password`, `role`, `fullname`, `email`, `phone`) VALUES ('1', 'teacher1', '123456a@A', '0', 'Nguyen Van A', 'a21@viettel.com.vn', '0972181178');
+
+
+
+
+
+
+
+Màn:
+- Login
+- logout
+- Các màn của giáo viên:
++ list svien
++ detail svien: nút để lại lời nhắn
++ edit svien 
++ delete svien (pop up)
++ create svien
++ list giaovien
++ detail giaovien
++ giao diện lời nhắn: textarea + button submit
+Nếu có lời nhắn rồi: textarea + button sửa/xóa
++ profile (list lời nhắn người khác nhắn cho mk)
++ list bài tập
++ create bài tập
++ list bài làm sinh viên
+
+- Các màn của sinh viên:
++ + list svien
++ detail svien: nút để lại lời nhắn
++ list giaovien
++ detail giaovien
++ giao diện lời nhắn: textarea + button submit
+Nếu có lời nhắn rồi: textarea + button sửa/xóa
++ profile (list lời nhắn người khác nhắn cho mk)
++ list bài tập (nút upload)
+
+
+
+
+
+
