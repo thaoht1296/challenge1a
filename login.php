@@ -6,8 +6,10 @@
     if (isset($_POST['login_user'])) {
         
         // Data sanitization to prevent SQL injection
-        $username = mysqli_real_escape_string($con, $_POST['username']);
+        // $username = mysqli_real_escape_string($con, $_POST['username']);
         $password = mysqli_real_escape_string($con, $_POST['password']);
+        $username = $_POST['username'];
+        // echo $username;
     
         // Error message if the input field is left blank
         if (empty($username)) {
@@ -25,6 +27,7 @@
             
             $query = "SELECT * FROM user WHERE username=
                     '$username' AND password='$password'";
+            echo $query;
             $results = mysqli_query($con, $query);
     
             // $results = 1 means that one user with the
@@ -48,17 +51,16 @@
                 else{
                     header('location: stu_home.php');
                 }
-                
-                
-                // Page on which the user is sent
-                // to after logging in
-                
             }
             else {
                 
                 // If the username and password doesn't match
                 array_push($errors, "Username or password incorrect");
             }
+        }
+        else{
+            echo "error";
+            header('location: index.php');
         }
     }
 

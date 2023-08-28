@@ -34,12 +34,18 @@ require 'dbcon.php';
                         <?php
                         if(isset($_GET['id']))
                         {
-                            $student_id = mysqli_real_escape_string($con, $_GET['id']);
+                            // $student_id = mysqli_real_escape_string($con, $_GET['id']);
+                            $student_id = $_GET['id'];
+                            // echo $student_id;
+                            // echo "\n";
                             // echo $student_id, "ttttt";
                             $query = "SELECT * FROM user WHERE id='$student_id' ";
+                            echo $query;
+                            echo "\n";
                             $query_run = mysqli_query($con, $query);
+                            $row = mysqli_num_rows($query_run);
 
-                            if(mysqli_num_rows($query_run) > 0)
+                            if( $row ==1 )
                             {
                                 $student = mysqli_fetch_array($query_run);
                                 ?>

